@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULANGAN HARIAN SEJARAH - HINDU-BUDDHA DAN SRIWIJAYA</title>
+    <style>
+        /* CSS sama seperti sebelumnya */
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Tampilan Awal -->
+    <div id="tampilan-awal" class="container">
+        <!-- Header dengan logo -->
+        <div class="header">
+            <div class="logo-container">
+                <img id="logo-sekolah" src="logo.png" alt="Logo Sekolah">
+            </div>
+            <h1>SMA NEGERI 5 TANAH PUTIH</h1>
+            <h2>KABUPATEN ROKAN HILIR</h2>
+            <div class="judul-ulangan">
+                <h3><i class="fas fa-book-open"></i> ULANGAN HARIAN SEJARAH</h3>
+                <p>Proses Masuk dan Berkembangnya Hindu-Buddha di Indonesia (Sriwijaya)</p>
+            </div>
+        </div>
+        
+        <!-- Form data diri -->
+        <div class="form-container">
+            <div class="info-box">
+                <h4><i class="fas fa-exclamation-circle"></i> PERHATIAN!</h4>
+                <p>Sebelum memulai ulangan, harap perhatikan hal berikut:</p>
+                <ul>
+                    <li><i class="fas fa-ban"></i> DILARANG mencontek atau membuka aplikasi lain</li>
+                    <li><i class="fas fa-ban"></i> DILARANG menyalin (copy-paste) soal atau jawaban</li>
+                    <li><i class="fas fa-ban"></i> DILARANG screenshot atau merekam layar</li>
+                    <li><i class="fas fa-clock"></i> Waktu pengerjaan: 13 menit 45 detik</li>
+                    <li><i class="fas fa-exclamation-triangle"></i> Kecurangan akan mengakhiri ujian otomatis tanpa kompensasi</li>
+                </ul>
+            </div>
+            
+            <form id="form-data-diri">
+                <div class="form-group">
+                    <label for="nama"><i class="fas fa-user"></i> NAMA SISWA:</label>
+                    <input type="text" id="nama" required placeholder="Masukkan nama lengkap">
+                </div>
+                
+                <div class="form-group">
+                    <label for="kelas"><i class="fas fa-users"></i> KELAS:</label>
+                    <select id="kelas" required>
+                        <option value="">Pilih Kelas</option>
+                        <option value="10 Satu">10 Satu</option>
+                        <option value="10 Dua">10 Dua</option>
+                        <option value="10 Tiga">10 Tiga</option>
+                        <option value="10 Empat">10 Empat</option>
+                        <option value="11 Satu">11 Satu</option>
+                        <option value="11 Dua">11 Dua</option>
+                        <option value="11 Tiga">11 Tiga</option>
+                        <option value="12 Satu">12 Satu</option>
+                        <option value="12 Dua">12 Dua</option>
+                        <option value="12 Tiga">12 Tiga</option>
+                    </select>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="setuju" required>
+                    <label for="setuju">Saya menyatakan akan mengerjakan ulangan dengan jujur tanpa mencontek</label>
+                </div>
+                
+                <button type="submit" id="mulai-ujian" class="btn-primary">
+                    <i class="fas fa-play-circle"></i> MULAI ULANGAN
+                </button>
+            </form>
+            
+            <div class="catatan">
+                <p><i class="fas fa-lock"></i> Sistem keamanan aktif: Monitoring perilaku ujian</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tampilan Ujian -->
+    <div id="tampilan-ujian" class="container" style="display:none;">
+        <!-- Header selama ujian -->
+        <div class="header-ujian">
+            <div class="info-siswa">
+                <div class="logo-small">
+                    <img src="logo.png" alt="Logo Sekolah">
+                </div>
+                <div>
+                    <h4 id="nama-tampilan"></h4>
+                    <p id="kelas-tampilan"></p>
+                </div>
+            </div>
+            
+            <div class="timer-container">
+                <div class="timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="timer">13:45</span>
+                </div>
+                <div class="peringatan-waktu">
+                    <p><i class="fas fa-exclamation-triangle"></i> Waktu tersisa</p>
+                </div>
+            </div>
+            
+            <div class="indikator-keamanan">
+                <div class="status-box" id="status-jujur">
+                    <i class="fas fa-user-check"></i>
+                    <span>Status: Jujur</span>
+                </div>
+                <div class="peringatan" id="peringatan-curang" style="display:none;">
+                    <i class="fas fa-user-slash"></i>
+                    <span>KECURANGAN TERDETEKSI!</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Container soal -->
+        <div class="soal-container">
+            <div class="soal-header">
+                <h3><i class="fas fa-history"></i> ULANGAN HARIAN SEJARAH</h3>
+                <p>Proses Masuk dan Berkembangnya Hindu-Buddha di Indonesia (Sriwijaya)</p>
+                <div class="info-soal">
+                    <p><i class="fas fa-list-ol"></i> Soal: <span id="jumlah-soal">15</span></p>
+                    <p><i class="fas fa-question-circle"></i> Terjawab: <span id="terjawab">0</span></p>
+                </div>
+            </div>
+            
+            <div id="daftar-soal">
+                <!-- Soal akan dimuat secara dinamis -->
+            </div>
+            
+            <div class="nav-soal">
+                <button id="sebelumnya" class="btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Sebelumnya
+                </button>
+                <button id="selanjutnya" class="btn-secondary">
+                    Selanjutnya <i class="fas fa-arrow-right"></i>
+                </button>
+                <button id="kirim-jawaban" class="btn-danger">
+                    <i class="fas fa-paper-plane"></i> Kirim Jawaban
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer-ujian">
+            <p><i class="fas fa-shield-alt"></i> Sistem keamanan aktif - Kecurangan akan mengakhiri ujian secara otomatis</p>
+        </div>
+    </div>
+    
+    <!-- Tampilan Hasil -->
+    <div id="tampilan-hasil" class="container" style="display:none;">
+        <div class="header">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo Sekolah">
+            </div>
+            <h1>SMA NEGERI 5 TANAH PUTIH</h1>
+            <h2>KABUPATEN ROKAN HILIR</h2>
+        </div>
+        
+        <div class="hasil-container">
+            <h3><i class="fas fa-clipboard-check"></i> HASIL ULANGAN HARIAN SEJARAH</h3>
+            
+            <div class="info-hasil">
+                <div class="card-hasil">
+                    <h4>Data Siswa</h4>
+                    <p><strong>Nama:</strong> <span id="hasil-nama"></span></p>
+                    <p><strong>Kelas:</strong> <span id="hasil-kelas"></span></p>
+                    <p><strong>Waktu:</strong> <span id="hasil-waktu"></span></p>
+                    <p><strong>Status:</strong> <span id="hasil-status"></span></p>
+                    <p><strong>Tanggal:</strong> <span id="hasil-tanggal"></span></p>
+                </div>
+                
+                <div class="card-hasil">
+                    <h4>Nilai Akhir</h4>
+                    <div class="nilai-container">
+                        <div class="nilai-angka" id="nilai-angka">0</div>
+                        <p>Skala: 0-100</p>
+                    </div>
+                </div>
+                
+                <div class="card-hasil">
+                    <h4>Laporan Sistem</h4>
+                    <div id="laporan-keamanan">
+                        <p><i class="fas fa-check-circle" style="color:#388e3c"></i> Tidak terdeteksi kecurangan</p>
+                    </div>
+                    <p style="font-size: 13px; color: #666; margin-top: 10px;">
+                        <i class="fas fa-info-circle"></i> Hasil telah dikirim ke guru
+                    </p>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="cetak-hasil" class="btn-secondary">
+                    <i class="fas fa-print"></i> CETAK HASIL
+                </button>
+                <button id="tutup-hasil" class="btn-primary">
+                    <i class="fas fa-check-circle"></i> SELESAI
+                </button>
+            </div>
+            
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee;">
+                <p style="color: #666; font-size: 14px;">
+                    <i class="fas fa-chalkboard-teacher"></i> 
+                    <strong>Pesan Guru:</strong> Terima kasih telah mengerjakan dengan jujur. Hasil ini akan dicatat sebagai nilai ulangan harian.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Peringatan -->
+    <div id="modal-peringatan" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> PERINGATAN SISTEM</h3>
+            </div>
+            <div class="modal-body">
+                <p id="pesan-peringatan"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="tutup-modal" class="btn-danger">MENGERTI</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data soal dan kunci jawaban (15 soal: Teori Hindu-Buddha + Sriwijaya)
+        const soalData = [
+            {
+                soal: "Teori masuknya Hindu-Buddha ke Indonesia yang menyatakan bahwa peran aktif dalam penyebaran agama dan kebudayaan dilakukan oleh kaum brahmana (pendeta) atas undangan penguasa lokal dinamakan teori...",
+                pilihan: ["Waisya", "Ksatria", "Brahmana", "Arus Balik", "Sudra"],
+                kunci: 2 // c) Brahmana
+            },
+            {
+                soal: "Salah satu bukti kuat yang mendukung teori Brahmana adalah...",
+                pilihan: [
+                    "Banyaknya prasasti berbahasa Sanskerta dan huruf Pallawa.",
+                    "Adanya penemuan arca-arca dewa-dewi India.",
+                    "Penggunaan sistem kasta dalam masyarakat.",
+                    "Ditemukannya candi-candi bercorak Hindu.",
+                    "Munculnya kerajaan-kerajaan bercorak Hindu-Buddha."
+                ],
+                kunci: 0 // a) Banyaknya prasasti berbahasa Sanskerta dan huruf Pallawa.
+            },
+            {
+                soal: "Teori 'Arus Balik' yang dikemukakan oleh F.D.K. Bosch menekankan pada peran...",
+                pilihan: [
+                    "Pedagang India yang menetap dan menikah dengan penduduk lokal.",
+                    "Bangsa Indonesia sendiri yang aktif belajar ke India dan kembali menyebarkan ilmunya.",
+                    "Kaum ksatria India yang kalah perang lalu mengungsi ke Nusantara.",
+                    "Para brahmana yang diundang secara khusus untuk menobatkan raja.",
+                    "Misionaris agama Buddha dari India yang menyebarkan ajaran."
+                ],
+                kunci: 1 // b) Bangsa Indonesia sendiri yang aktif belajar ke India dan kembali menyebarkan ilmunya.
+            },
+            {
+                soal: "Salah satu perubahan signifikan dalam kehidupan politik masyarakat Indonesia setelah masuknya pengaruh Hindu-Buddha adalah...",
+                pilihan: [
+                    "Sistem pemerintahan kesukuan digantikan oleh sistem kerajaan (monarki).",
+                    "Munculnya demokrasi langsung di tingkat desa.",
+                    "Kekuasaan dipegang sepenuhnya oleh dewan perang.",
+                    "Pemimpin dipilih berdasarkan kekayaan dan kepemilikan tanah.",
+                    "Sistem pemerintahan menjadi teokrasi yang dipimpin oleh pendeta."
+                ],
+                kunci: 0 // a) Sistem pemerintahan kesukuan digantikan oleh sistem kerajaan (monarki).
+            },
+            {
+                soal: "Dalam bidang ekonomi, masuknya pengaruh Hindu-Buddha memperkuat kegiatan...",
+                pilihan: [
+                    "Pertanian subsisten di pedalaman.",
+                    "Perburuan dan meramu.",
+                    "Pelayaran dan perdagangan antarpulau serta internasional.",
+                    "Industri manufaktur berskala besar.",
+                    "Ekonomi barter dalam skala kecil."
+                ],
+                kunci: 2 // c) Pelayaran dan perdagangan antarpulau serta internasional.
+            },
+            {
+                soal: "Walaupun pengaruh Hindu-Buddha kuat, unsur-unsur kebudayaan asli Indonesia (lokal) tetap bertahan dan berakulturasi. Hal ini dapat dilihat dari...",
+                pilihan: [
+                    "Bentuk candi seperti Prambanan dan Borobudur yang memiliki unsur punden berundak.",
+                    "Penggunaan bahasa Sanskerta secara penuh menggantikan bahasa lokal.",
+                    "Penghapusan sistem kepercayaan animisme dan dinamisme.",
+                    "Raja dianggap sebagai titisan dewa secara mutlak tanpa syarat.",
+                    "Seluruh sistem hukum adat diganti dengan kitab hukum Manu."
+                ],
+                kunci: 0 // a) Bentuk candi seperti Prambanan dan Borobudur yang memiliki unsur punden berundak.
+            },
+            {
+                soal: "Sistem sosial yang dibawa agama Hindu adalah sistem kasta (caturwarna). Namun dalam penerapannya di Indonesia, sistem kasta tidak seketat di India karena...",
+                pilihan: [
+                    "Pengaruh Buddha yang menentang sistem kasta lebih kuat.",
+                    "Masyarakat Indonesia sudah memiliki stratifikasi sosial sendiri yang berakulturasi.",
+                    "Kaum brahmana dari India melonggarkan aturannya.",
+                    "Semua kasta memiliki hak yang sama dalam politik.",
+                    "Sistem kasta hanya berlaku untuk kaum imigran India."
+                ],
+                kunci: 1 // b) Masyarakat Indonesia sudah memiliki stratifikasi sosial sendiri yang berakulturasi.
+            },
+            {
+                soal: "Berdasarkan bukti sejarah, Kerajaan Sriwijaya berkembang sebagai kerajaan maritim terbesar di Nusantara yang bercorak...",
+                pilihan: ["Hindu", "Buddha", "Islam", "Hindu dan Buddha (Sinkretis)", "Kepercayaan Lokal"],
+                kunci: 1 // b) Buddha
+            },
+            {
+                soal: "Prasasti yang menjadi bukti kuat keberadaan Kerajaan Sriwijaya dan ditemukan di daerah Palembang, yang menyebutkan kata 'Sriwijaya' untuk pertama kalinya adalah...",
+                pilihan: [
+                    "Prasasti Kota Kapur",
+                    "Prasasti Talang Tuo",
+                    "Prasasti Kedukan Bukit",
+                    "Prasasti Telaga Batu",
+                    "Prasasti Karang Berahi"
+                ],
+                kunci: 2 // c) Prasasti Kedukan Bukit
+            },
+            {
+                soal: "Prasasti Telaga Batu berisi tentang...",
+                pilihan: [
+                    "Kutukan bagi siapa saja yang tidak setia kepada raja Sriwijaya.",
+                    "Pembangunan taman Sriksetra oleh Dapunta Hyang.",
+                    "Ekspedisi militer Dapunta Hyang membentuk wanua (permukiman).",
+                    "Permohonan kepada dewa untuk keselamatan negara.",
+                    "Penaklukan daerah Jambi oleh Sriwijaya."
+                ],
+                kunci: 0 // a) Kutukan bagi siapa saja yang tidak setia kepada raja Sriwijaya.
+            },
+            {
+                soal: "Pencapaian Kerajaan Sriwijaya di bidang pendidikan dan keagamaan adalah dengan menjadi pusat pembelajaran agama Buddha aliran... di Asia Tenggara.",
+                pilihan: ["Theravada", "Mahayana", "Vajrayana", "Hinayana", "Zen"],
+                kunci: 1 // b) Mahayana
+            },
+            {
+                soal: "Bukti dari catatan luar negeri tentang kejayaan Sriwijaya sebagai pusat perdagangan dan agama Buddha berasal dari seorang pendeta dari Cina yang bernama...",
+                pilihan: ["Fa-Hien", "I-Tsing", "Cheng Ho", "Marcopolo", "Ibn Battuta"],
+                kunci: 1 // b) I-Tsing
+            },
+            {
+                soal: "Faktor utama yang mendukung kemajuan Sriwijaya sebagai kerajaan maritim adalah...",
+                pilihan: [
+                    "Kekuatan angkatan darat yang besar.",
+                    "Lokasinya yang strategis di Selat Malaka dan memiliki banyak pelabuhan (emporium).",
+                    "Kemampuan membangun candi-candi megah.",
+                    "Sistem pertanian yang sangat maju.",
+                    "Penemuan tambang emas yang melimpah."
+                ],
+                kunci: 1 // b) Lokasinya yang strategis di Selat Malaka dan memiliki banyak pelabuhan (emporium).
+            },
+            {
+                soal: "Salah satu isi penting dari Prasasti Kedukan Bukit (682 M) adalah...",
+                pilihan: [
+                    "Kutukan terhadap para pemberontak.",
+                    "Perjalanan suci (siddhayatra) Dapunta Hyang dengan membawa 20.000 tentara.",
+                    "Daftar upeti yang harus dibayarkan kepada raja.",
+                    "Penobatan raja Sriwijaya.",
+                    "Pembangunan pusat pendidikan agama."
+                ],
+                kunci: 1 // b) Perjalanan suci (siddhayatra) Dapunta Hyang dengan membawa 20.000 tentara.
+            },
+            {
+                soal: "Strategi Sriwijaya dalam menguasai dan mempertahankan hegemoni perdagangan di Nusantara adalah dengan cara...",
+                pilihan: [
+                    "Membangun benteng-benteng di setiap pulau.",
+                    "Menjalin hubungan diplomatik secara eksklusif dengan India.",
+                    "Menguasai daerah-daerah penghasil komoditas penting dan pusat-pusat perdagangan di pesisir.",
+                    "Menerapkan sistem upeti yang memberatkan pada kerajaan kecil.",
+                    "Fokus pada pengembangan budaya dan seni."
+                ],
+                kunci: 2 // c) Menguasai daerah-daerah penghasil komoditas penting dan pusat-pusat perdagangan di pesisir.
+            }
+        ];
+
+        // Variabel global
+        let jawabanSiswa = Array(15).fill(null);
+        let waktuMulai, timerInterval;
+        let waktuTotal = 13 * 60 + 45;
+        let waktuTersisa = waktuTotal;
+        let indeksSoalAktif = 0;
+        let statusJujur = true;
+        let logAktivitas = [];
+        let waktuPerSoal = Array(15).fill(0);
+        let waktuMulaiSoal;
+        let kecuranganTerjadi = false;
+
+        // DOM Elements
+        const tampilanAwal = document.getElementById('tampilan-awal');
+        const tampilanUjian = document.getElementById('tampilan-ujian');
+        const tampilanHasil = document.getElementById('tampilan-hasil');
+        const formDataDiri = document.getElementById('form-data-diri');
+        const namaInput = document.getElementById('nama');
+        const kelasSelect = document.getElementById('kelas');
+        const timerDisplay = document.getElementById('timer');
+        const namaTampilan = document.getElementById('nama-tampilan');
+        const kelasTampilan = document.getElementById('kelas-tampilan');
+        const daftarSoal = document.getElementById('daftar-soal');
+        const btnSebelumnya = document.getElementById('sebelumnya');
+        const btnSelanjutnya = document.getElementById('selanjutnya');
+        const btnKirimJawaban = document.getElementById('kirim-jawaban');
+        const statusJujurElement = document.getElementById('status-jujur');
+        const peringatanCurang = document.getElementById('peringatan-curang');
+        const modalPeringatan = document.getElementById('modal-peringatan');
+        const pesanPeringatan = document.getElementById('pesan-peringatan');
+        const tutupModalBtn = document.getElementById('tutup-modal');
+        const cetakHasilBtn = document.getElementById('cetak-hasil');
+
+        // Fungsi untuk mengacak array
+        function acakArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Acak soal untuk setiap siswa
+        const soalAcak = acakArray(soalData.map((soal, index) => ({ ...soal, indexAsli: index })));
+
+        // Update soal terjawab
+        function updateSoalTerjawab() {
+            const terjawab = jawabanSiswa.filter(j => j !== null).length;
+            document.getElementById('terjawab').textContent = terjawab;
+        }
+
+        // Format waktu
+        function formatWaktu(detik) {
+            const menit = Math.floor(detik / 60);
+            const sisaDetik = detik % 60;
+            return `${menit.toString().padStart(2, '0')}:${sisaDetik.toString().padStart(2, '0')}`;
+        }
+
+        // Update timer
+        function updateTimer() {
+            if (waktuTersisa <= 0) {
+                clearInterval(timerInterval);
+                selesaiUjian();
+                return;
+            }
+            
+            waktuTersisa--;
+            timerDisplay.textContent = formatWaktu(waktuTersisa);
+            
+            if (waktuTersisa <= 60) {
+                timerDisplay.style.color = '#d32f2f';
+            }
+        }
+
+        // Tampilkan soal
+        function tampilkanSoal(indeks) {
+            daftarSoal.innerHTML = '';
+            indeksSoalAktif = indeks;
+            
+            // Update waktu soal sebelumnya
+            if (waktuMulaiSoal) {
+                const waktuSekarang = Date.now();
+                const waktuDiSoal = Math.floor((waktuSekarang - waktuMulaiSoal) / 1000);
+                waktuPerSoal[indeksSoalAktif] += waktuDiSoal;
+            }
+            
+            // Set waktu mulai soal baru
+            waktuMulaiSoal = Date.now();
+            
+            // Tampilkan soal
+            const soal = soalAcak[indeks];
+            const soalItem = document.createElement('div');
+            soalItem.className = 'soal-item';
+            soalItem.id = `soal-${indeks}`;
+            
+            let pilihanHTML = '';
+            soal.pilihan.forEach((pilihan, index) => {
+                const terpilih = jawabanSiswa[indeks] === index ? 'terpilih' : '';
+                pilihanHTML += `
+                <div class="pilihan">
+                    <label class="${terpilih}">
+                        <input type="radio" name="soal-${indeks}" value="${index}" ${jawabanSiswa[indeks] === index ? 'checked' : ''}>
+                        <span class="label-text">${String.fromCharCode(65 + index)}. ${pilihan}</span>
+                    </label>
+                </div>
+                `;
+            });
+            
+            soalItem.innerHTML = `
+                <h4>Soal ${indeks + 1}: ${soal.soal}</h4>
+                ${pilihanHTML}
+            `;
+            
+            daftarSoal.appendChild(soalItem);
+            
+            // Event listener untuk pilihan
+            const radioInputs = soalItem.querySelectorAll('input[type="radio"]');
+            radioInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    jawabanSiswa[indeks] = parseInt(this.value);
+                    updateSoalTerjawab();
+                    
+                    const semuaLabel = soalItem.querySelectorAll('label');
+                    semuaLabel.forEach(label => label.classList.remove('terpilih'));
+                    this.closest('label').classList.add('terpilih');
+                });
+            });
+            
+            // Update tombol navigasi
+            btnSebelumnya.disabled = indeks === 0;
+            btnSelanjutnya.disabled = indeks === soalAcak.length - 1;
+            
+            updateNavigasiSoal();
+        }
+
+        // Update navigasi soal
+        function updateNavigasiSoal() {
+            const navLama = document.querySelector('.nav-soal-indikator');
+            if (navLama) navLama.remove();
+            
+            const navContainer = document.createElement('div');
+            navContainer.className = 'nav-soal-indikator';
+            
+            soalAcak.forEach((soal, index) => {
+                const btnSoal = document.createElement('button');
+                btnSoal.textContent = index + 1;
+                btnSoal.className = 'btn-nomor-soal';
+                btnSoal.style.backgroundColor = jawabanSiswa[index] !== null ? '#5c6bc0' : 'white';
+                btnSoal.style.color = jawabanSiswa[index] !== null ? 'white' : '#333';
+                
+                if (index === indeksSoalAktif) {
+                    btnSoal.style.borderColor = '#1a237e';
+                    btnSoal.style.transform = 'scale(1.1)';
+                }
+                
+                btnSoal.addEventListener('click', () => {
+                    tampilkanSoal(index);
+                });
+                
+                navContainer.appendChild(btnSoal);
+            });
+            
+            daftarSoal.parentNode.insertBefore(navContainer, daftarSoal.nextSibling);
+        }
+
+        // Deteksi kecurangan (termasuk screenshot)
+        function setupDeteksiKecurangan() {
+            // Sistem skor kecurigaan
+            let skorKecurigaan = 0;
+            const MAX_SKOR_KECURIGAAN = 15;
+            
+            // Variabel tracking
+            let orientationChangeCount = 0;
+            let resizeCount = 0;
+            let lastResizeTime = Date.now();
+            let hiddenTime = 0;
+            let visibilityChecks = 0;
+            
+            function tambahSkorKecurigaan(points, alasan) {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    skorKecurigaan += points;
+                    logAktivitas.push(`[SKOR +${points}] ${alasan} - Total: ${skorKecurigaan}`);
+                    
+                    if (skorKecurigaan >= MAX_SKOR_KECURIGAAN) {
+                        langsungSelesaikanKarenaCurang(`Skor kecurigaan mencapai ${skorKecurigaan}: ${alasan}`);
+                    } else if (skorKecurigaan >= MAX_SKOR_KECURIGAAN / 2) {
+                        tampilkanPeringatan(`⚠️ AKTIVITAS MENCURIGAKAN! Skor: ${skorKecurigaan}/${MAX_SKOR_KECURIGAAN}`);
+                    }
+                }
+            }
+            
+            // 1. Deteksi keluar dari tab/window
+            window.addEventListener('blur', () => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    tambahSkorKecurigaan(5, "Meninggalkan halaman ujian");
+                    logAktivitas.push(`Keluar dari halaman - ${new Date().toLocaleTimeString()}`);
+                    langsungSelesaikanKarenaCurang("Meninggalkan halaman ujian");
+                }
+            });
+            
+            // 2. Deteksi copy paste
+            document.addEventListener('copy', (e) => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    e.preventDefault();
+                    tambahSkorKecurigaan(4, "Mencoba copy");
+                    logAktivitas.push(`Mencoba menyalin - ${new Date().toLocaleTimeString()}`);
+                    langsungSelesaikanKarenaCurang("Mencoba menyalin (copy)");
+                }
+            });
+            
+            document.addEventListener('paste', (e) => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    e.preventDefault();
+                    tambahSkorKecurigaan(4, "Mencoba paste");
+                    logAktivitas.push(`Mencoba menempel - ${new Date().toLocaleTimeString()}`);
+                    langsungSelesaikanKarenaCurang("Mencoba menempel (paste)");
+                }
+            });
+            
+            // 3. Deteksi klik kanan
+            document.addEventListener('contextmenu', (e) => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    e.preventDefault();
+                    tambahSkorKecurigaan(1, "Klik kanan");
+                    logAktivitas.push(`Klik kanan diblokir - ${new Date().toLocaleTimeString()}`);
+                }
+            });
+            
+            // 4. Deteksi developer tools
+            document.addEventListener('keydown', (e) => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    // F12, Ctrl+Shift+I, Ctrl+Shift+J
+                    if (e.keyCode === 123 || 
+                        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74))) {
+                        e.preventDefault();
+                        tambahSkorKecurigaan(5, "Developer tools");
+                        logAktivitas.push(`Mencoba developer tools - ${new Date().toLocaleTimeString()}`);
+                        langsungSelesaikanKarenaCurang("Mencoba membuka developer tools");
+                    }
+                }
+            });
+            
+            // 5. Deteksi tombol screenshot (Desktop)
+            document.addEventListener('keydown', (e) => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    // PrintScreen
+                    if (e.key === 'PrintScreen' || e.keyCode === 44) {
+                        e.preventDefault();
+                        tambahSkorKecurigaan(5, "Tombol PrintScreen");
+                        logAktivitas.push(`Tombol PrintScreen ditekan - ${new Date().toLocaleTimeString()}`);
+                        langsungSelesaikanKarenaCurang("Mencoba screenshot dengan PrintScreen");
+                    }
+                    
+                    // Ctrl/Cmd + Shift + S
+                    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 's' || e.keyCode === 83)) {
+                        e.preventDefault();
+                        tambahSkorKecurigaan(5, "Ctrl+Shift+S");
+                        logAktivitas.push(`Ctrl+Shift+S ditekan - ${new Date().toLocaleTimeString()}`);
+                        langsungSelesaikanKarenaCurang("Mencoba screenshot dengan Ctrl+Shift+S");
+                    }
+                    
+                    // Cmd + Shift + 3/4 (Mac)
+                    if (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4' || e.keyCode === 51 || e.keyCode === 52)) {
+                        e.preventDefault();
+                        tambahSkorKecurigaan(5, `Cmd+Shift+${e.key}`);
+                        logAktivitas.push(`Cmd+Shift+${e.key} ditekan - ${new Date().toLocaleTimeString()}`);
+                        langsungSelesaikanKarenaCurang(`Mencoba screenshot dengan Cmd+Shift+${e.key}`);
+                    }
+                    
+                    // Ctrl + P (Print)
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                        e.preventDefault();
+                        tambahSkorKecurigaan(3, "Ctrl+P (Print)");
+                        logAktivitas.push(`Ctrl+P ditekan - ${new Date().toLocaleTimeString()}`);
+                    }
+                }
+            });
+            
+            // 6. Deteksi orientasi layar (Mobile screenshot)
+            window.addEventListener('orientationchange', () => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    orientationChangeCount++;
+                    const orientation = window.orientation;
+                    logAktivitas.push(`Orientasi: ${orientation}° - ${new Date().toLocaleTimeString()}`);
+                    
+                    tambahSkorKecurigaan(1, `Perubahan orientasi ke ${orientation}°`);
+                    
+                    if (orientationChangeCount >= 3) {
+                        tambahSkorKecurigaan(3, `Perubahan orientasi berulang (${orientationChangeCount}x)`);
+                    }
+                }
+            });
+            
+            // 7. Deteksi resize window cepat
+            window.addEventListener('resize', () => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    const now = Date.now();
+                    const timeSinceLastResize = now - lastResizeTime;
+                    
+                    if (timeSinceLastResize < 100) {
+                        resizeCount++;
+                        logAktivitas.push(`Resize cepat: ${timeSinceLastResize}ms - ${new Date().toLocaleTimeString()}`);
+                        
+                        tambahSkorKecurigaan(1, "Resize cepat");
+                        
+                        if (resizeCount >= 3) {
+                            tambahSkorKecurigaan(3, `Resize cepat berulang (${resizeCount}x)`);
+                        }
+                    }
+                    
+                    lastResizeTime = now;
+                }
+            });
+            
+            // 8. Deteksi visibility change (mungkin notifikasi screenshot)
+            document.addEventListener('visibilitychange', () => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    if (document.hidden) {
+                        hiddenTime = Date.now();
+                        logAktivitas.push(`Halaman tersembunyi - ${new Date().toLocaleTimeString()}`);
+                        tambahSkorKecurigaan(2, "Halaman tersembunyi");
+                    } else {
+                        const timeHidden = Date.now() - hiddenTime;
+                        
+                        if (timeHidden > 50 && timeHidden < 500) {
+                            visibilityChecks++;
+                            logAktivitas.push(`Hidden ${timeHidden}ms - ${new Date().toLocaleTimeString()}`);
+                            
+                            tambahSkorKecurigaan(2, `Hidden ${timeHidden}ms`);
+                            
+                            if (visibilityChecks >= 2) {
+                                tambahSkorKecurigaan(3, `Pola hidden berulang (${visibilityChecks}x)`);
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 9. Deteksi fullscreen exit
+            document.addEventListener('fullscreenchange', () => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    if (!document.fullscreenElement) {
+                        tambahSkorKecurigaan(5, "Keluar fullscreen");
+                        logAktivitas.push(`Keluar dari fullscreen - ${new Date().toLocaleTimeString()}`);
+                        langsungSelesaikanKarenaCurang("Keluar dari mode fullscreen");
+                    }
+                }
+            });
+            
+            document.addEventListener('webkitfullscreenchange', () => {
+                if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                    if (!document.webkitFullscreenElement) {
+                        tambahSkorKecurigaan(5, "Keluar fullscreen");
+                        logAktivitas.push(`Keluar dari fullscreen (webkit) - ${new Date().toLocaleTimeString()}`);
+                        langsungSelesaikanKarenaCurang("Keluar dari mode fullscreen");
+                    }
+                }
+            });
+            
+            // 10. Deteksi akses media devices
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                const originalGetUserMedia = navigator.mediaDevices.getUserMedia;
+                
+                navigator.mediaDevices.getUserMedia = function(constraints) {
+                    if (tampilanUjian.style.display !== 'none' && !kecuranganTerjadi) {
+                        tambahSkorKecurigaan(10, "Akses kamera/mikrofon");
+                        logAktivitas.push(`Mencoba akses media devices - ${new Date().toLocaleTimeString()}`);
+                        langsungSelesaikanKarenaCurang("Mencoba mengakses kamera/mikrofon");
+                        return Promise.reject(new Error('Akses kamera/mikrofon diblokir selama ujian'));
+                    }
+                    return originalGetUserMedia.apply(this, arguments);
+                };
+            }
+            
+            // 11. Watermark nama siswa di background (mencegah screenshot berguna)
+            document.body.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><text x="50%" y="50%" font-size="24" fill="rgba(0,0,0,0.1)" transform="rotate(-45, 50%, 50%)" text-anchor="middle">${namaInput.value} - ${kelasSelect.value} - ULANGAN SEJARAH</text></svg>')`;
+            
+            logAktivitas.push(`Deteksi kecurangan aktif - ${new Date().toLocaleTimeString()}`);
+        }
+
+        // Langsung selesaikan karena curang
+        function langsungSelesaikanKarenaCurang(alasan) {
+            if (!kecuranganTerjadi) {
+                kecuranganTerjadi = true;
+                statusJujur = false;
+                statusJujurElement.style.display = 'none';
+                peringatanCurang.style.display = 'flex';
+                
+                logAktivitas.push(`KECURANGAN: ${alasan} - ${new Date().toLocaleTimeString()}`);
+                
+                clearInterval(timerInterval);
+                selesaiUjian();
+            }
+        }
+
+        // Tampilkan peringatan modal
+        function tampilkanPeringatan(pesan) {
+            pesanPeringatan.textContent = pesan;
+            modalPeringatan.style.display = 'flex';
+        }
+
+        // Selesaikan ujian
+        function selesaiUjian() {
+            clearInterval(timerInterval);
+            
+            const waktuSelesai = Date.now();
+            const waktuPengerjaanDetik = Math.floor((waktuSelesai - waktuMulai) / 1000);
+            const waktuPengerjaanFormat = formatWaktu(waktuPengerjaanDetik);
+            
+            let jawabanBenar = 0;
+            let jawabanSiswaArray = [];
+            
+            jawabanSiswa.forEach((jawaban, index) => {
+                const soal = soalAcak[index];
+                const benar = jawaban === soal.kunci;
+                if (benar) jawabanBenar++;
+                
+                jawabanSiswaArray.push({
+                    soal: index + 1,
+                    jawaban: jawaban !== null ? String.fromCharCode(65 + jawaban) : "Kosong"
+                });
+            });
+            
+            const nilai = Math.round((jawabanBenar / soalData.length) * 100);
+            
+            tampilkanHasil(nilai, jawabanBenar, waktuPengerjaanFormat, jawabanSiswaArray);
+            kirimKeGoogleSheets(nilai, jawabanBenar, waktuPengerjaanDetik, jawabanSiswaArray);
+        }
+
+        // Tampilkan hasil
+        function tampilkanHasil(nilai, jawabanBenar, waktuPengerjaan, jawabanSiswaArray) {
+            tampilanUjian.style.display = 'none';
+            tampilanHasil.style.display = 'block';
+            
+            document.getElementById('hasil-nama').textContent = namaInput.value;
+            document.getElementById('hasil-kelas').textContent = kelasSelect.value;
+            document.getElementById('hasil-waktu').textContent = waktuPengerjaan;
+            document.getElementById('hasil-status').textContent = statusJujur ? "Jujur" : "Curang";
+            document.getElementById('hasil-tanggal').textContent = new Date().toLocaleString();
+            
+            document.getElementById('nilai-angka').textContent = nilai;
+            
+            const laporanKeamanan = document.getElementById('laporan-keamanan');
+            if (statusJujur) {
+                laporanKeamanan.innerHTML = `
+                    <p><i class="fas fa-check-circle" style="color:#388e3c"></i> Tidak terdeteksi kecurangan</p>
+                    <p><i class="fas fa-shield-alt" style="color:#5c6bc0"></i> Siswa mengerjakan dengan jujur</p>
+                `;
+            } else {
+                laporanKeamanan.innerHTML = `
+                    <p><i class="fas fa-exclamation-triangle" style="color:#d32f2f"></i> <strong>TERDETEKSI KECURANGAN!</strong></p>
+                    <p><i class="fas fa-times-circle" style="color:#d32f2f"></i> Ujian diakhiri otomatis</p>
+                    <p><i class="fas fa-user-slash" style="color:#d32f2f"></i> Status: TIDAK JUJUR</p>
+                `;
+            }
+        }
+
+        // Kirim data ke Google Sheets
+        function kirimKeGoogleSheets(nilai, jawabanBenar, waktuDetik, jawabanSiswaArray) {
+            const data = {
+                nama: namaInput.value,
+                kelas: kelasSelect.value,
+                nilai: nilai,
+                jawabanBenar: jawabanBenar,
+                jawabanSalah: soalData.length - jawabanBenar,
+                waktuPengerjaan: waktuDetik,
+                status: statusJujur ? "Jujur" : "Curang",
+                logAktivitas: logAktivitas.join(" | "),
+                waktuPerSoal: waktuPerSoal.join(","),
+                jawabanSiswa: JSON.stringify(jawabanSiswaArray),
+                timestamp: new Date().toLocaleString()
+            };
+            
+            // ===========================================
+            // GANTI URL DI BAWAH INI DENGAN URL APPS SCRIPT ANDA!
+            const scriptURL = "https://script.google.com/macros/s/AKfycbwLqLdA95JT8nZzolTtEQQ_C0Lc8AhNMx4lKDmcHsMx1xyz-ib2gh7HBo1VfGMRmb8z4w/exec";
+            // ===========================================
+            
+            const formData = new FormData();
+            for (const key in data) {
+                formData.append(key, data[key]);
+            }
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                body: formData
+            }).then(() => {
+                console.log("✅ Data berhasil dikirim ke Google Sheets");
+            }).catch(error => {
+                console.error("❌ Error mengirim data:", error);
+            });
+        }
+
+        // Event Listeners
+        formDataDiri.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!namaInput.value.trim() || !kelasSelect.value) {
+                tampilkanPeringatan("Harap isi nama dan pilih kelas terlebih dahulu!");
+                return;
+            }
+            
+            waktuMulai = Date.now();
+            waktuTersisa = waktuTotal;
+            
+            namaTampilan.textContent = namaInput.value;
+            kelasTampilan.textContent = kelasSelect.value;
+            
+            setupDeteksiKecurangan();
+            
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            tampilkanSoal(0);
+            updateSoalTerjawab();
+            
+            tampilanAwal.style.display = 'none';
+            tampilanUjian.style.display = 'block';
+            
+            document.documentElement.requestFullscreen().catch(err => {
+                console.log("Fullscreen error: ", err);
+            });
+            
+            logAktivitas.push(`Ujian dimulai - ${new Date().toLocaleTimeString()}`);
+        });
+
+        btnSebelumnya.addEventListener('click', () => {
+            if (indeksSoalAktif > 0) {
+                tampilkanSoal(indeksSoalAktif - 1);
+            }
+        });
+
+        btnSelanjutnya.addEventListener('click', () => {
+            if (indeksSoalAktif < soalAcak.length - 1) {
+                tampilkanSoal(indeksSoalAktif + 1);
+            }
+        });
+
+        btnKirimJawaban.addEventListener('click', () => {
+            const terjawab = jawabanSiswa.filter(j => j !== null).length;
+            
+            if (terjawab < soalData.length) {
+                if (!confirm(`Anda baru menjawab ${terjawab} dari ${soalData.length} soal. Yakin ingin mengirim?`)) {
+                    return;
+                }
+            }
+            
+            selesaiUjian();
+        });
+
+        tutupModalBtn.addEventListener('click', () => {
+            modalPeringatan.style.display = 'none';
+        });
+
+        cetakHasilBtn.addEventListener('click', () => {
+            window.print();
+        });
+
+        document.getElementById('tutup-hasil').addEventListener('click', () => {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            }
+            
+            alert("Terima kasih telah mengerjakan ulangan.");
+        });
+
+        // Blokir keluar dari halaman
+        window.addEventListener('beforeunload', (e) => {
+            if (tampilanUjian.style.display !== 'none') {
+                e.preventDefault();
+                e.returnValue = 'Jika keluar, ujian akan diakhiri otomatis!';
+            }
+        });
+
+        // Inisialisasi
+        updateSoalTerjawab();
+    </script>
+</body>
+</html>
